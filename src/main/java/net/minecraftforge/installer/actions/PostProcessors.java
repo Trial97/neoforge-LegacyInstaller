@@ -275,6 +275,10 @@ public class PostProcessors {
                             String sha = DownloadUtils.getSha1(artifact);
                             if (sha.equals(e.getValue())) {
                                 log("  Output: " + e.getKey() + " Checksum Validated: " + sha);
+                            } else if (SimpleInstaller.skipHashCheck) {
+                                log("    " + e.getKey());
+                                log("      Expected: " + e.getValue());
+                                log("      Actual:   " + sha);
                             } else {
                                 err.append("\n    ").append(e.getKey())
                                         .append("\n      Expected: ").append(e.getValue())

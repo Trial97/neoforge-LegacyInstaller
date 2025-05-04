@@ -53,6 +53,7 @@ public class SimpleInstaller {
     public static boolean headless = false;
     public static boolean debug = false;
     public static URL mirror = null;
+    public static boolean skipHashCheck = false;
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         ProgressCallback monitor;
@@ -97,6 +98,7 @@ public class SimpleInstaller {
         OptionSpec<Void> helpOption = parser.acceptsAll(Arrays.asList("h", "help"), "Help with this installer");
         OptionSpec<Void> offlineOption = parser.accepts("offline", "Don't attempt any network calls");
         OptionSpec<Void> debugOption = parser.accepts("debug", "Run in debug mode -- don't delete any files");
+        OptionSpec<Void> skipHashCheckOption = parser.accepts("skipHashCheck", "skips the hash check when verifing outputs");
         OptionSpec<URL> mirrorOption = parser.accepts("mirror", "Use a specific mirror URL").withRequiredArg().ofType(URL.class);
         OptionSet optionSet = parser.parse(args);
 
@@ -109,6 +111,7 @@ public class SimpleInstaller {
         if (optionSet.has(mirrorOption)) {
             mirror = optionSet.valueOf(mirrorOption);
         }
+        skipHashCheck = optionSet.has(skipHashCheckOption);
 
         boolean isOffline = optionSet.has(offlineOption);
         if (Files.isRegularFile(installer.toPath())) {
