@@ -98,7 +98,7 @@ public class SimpleInstaller {
         OptionSpec<Void> helpOption = parser.acceptsAll(Arrays.asList("h", "help"), "Help with this installer");
         OptionSpec<Void> offlineOption = parser.accepts("offline", "Don't attempt any network calls");
         OptionSpec<Void> debugOption = parser.accepts("debug", "Run in debug mode -- don't delete any files");
-        OptionSpec<Void> skipHashCheckOption = parser.accepts("skipHashCheck", "skips the hash check when verifing outputs");
+        OptionSpec<Void> skipHashCheckOption = parser.accepts("skip-hash-check", "Skips the hash check when verifying outputs");
         OptionSpec<URL> mirrorOption = parser.accepts("mirror", "Use a specific mirror URL").withRequiredArg().ofType(URL.class);
         OptionSet optionSet = parser.parse(args);
 
